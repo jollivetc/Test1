@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: dev
+
+logging:
+  level:
+    org:
+      springframework:
+        r2dbc: DEBUG
+---
+spring:
+  profiles: dev
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/demo
+    username: postgres
+    password: password
+---
+spring:
+  profiles: test
+  r2dbc:
+    url: r2dbc:h2:mem://test
+    name: sa
+    password:

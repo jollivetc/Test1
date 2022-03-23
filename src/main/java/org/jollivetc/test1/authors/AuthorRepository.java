@@ -7,6 +7,5 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface AuthorRepository extends ReactiveCrudRepository<Author, Long> {
-    Mono<Author> findById(Mono<String> authorId, Class<Author> authorClass);
-
+    Mono<Author> findById(String authorId, Class<Author> authorClass);
 }

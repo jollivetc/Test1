@@ -23,10 +23,10 @@ public class AuthorHandler {
     }
 
     public Mono<ServerResponse> findById(ServerRequest serverRequest){
-        Mono<String> authorId= Mono.just(serverRequest.pathVariable("id"));
-        authorRepository.findById(authorId, Author.class).subscribe(System.out::println);
+        Mono<Author> author = Mono.just(serverRequest.pathVariable("id"))
+                .flatMap((authorId) -> authorRepository.findById(authorId, Author.class));
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(
-                    BodyInserters.fromPublisher( authorRepository.findById(authorId, Author.class), Author.class)
+                    BodyInserters.fromPublisher( author, Author.class)
         );
     }
 }
